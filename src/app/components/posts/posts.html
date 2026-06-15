@@ -1,0 +1,11 @@
+@if (posts$ | async; as posts) {
+  <ul>
+    @for (post of posts; track post.id) {
+      <li>{{ post.title }}</li>
+    } @empty {
+      <li><p>No Posts Availaible</p></li>
+    }
+  </ul>
+} @else {
+  <p>Loading...</p>
+}
