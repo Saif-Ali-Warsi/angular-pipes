@@ -2,7 +2,7 @@
   <ul>
     @for (user of users; track user.id) {
       <li>
-        {{ user.name }} - {{user.email}}
+        {{ user.name | textTruncate }} - {{user.email}}
       </li>
     } @empty {
       <li><p>No User Available</p></li>

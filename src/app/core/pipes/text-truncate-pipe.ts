@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'textTruncate'
+  name: 'textTruncate',
 })
 export class TextTruncatePipe implements PipeTransform {
+  transform(value: string): string {
+    if (!value) return '';
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+    return value.slice(0, 4) + '...';
   }
-
 }
