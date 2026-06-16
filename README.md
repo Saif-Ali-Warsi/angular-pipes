@@ -1,59 +1,31 @@
-# AngularPipes
+# Angular Custom Pipe Exercise: Text Truncation
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.28.
+A hands-on Angular exercise focused on transforming template data using a custom data-transformation **Pipe** (`textTruncate`) paired alongside Angular's built-in **AsyncPipe** and modern control flow syntax.
 
-## Development server
+## 🚀 Concept Overview
 
-To start a local development server, run:
+Pipes in Angular are simple functions designed to accept an input value, process it, and return a transformed value directly inside the HTML template. 
 
-```bash
-ng serve
-```
+In this exercise, data streams reactively via an asynchronous observable stream, unboxes seamlessly via the `async` pipe, and has its text output visually modified by our custom pipe.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🛠️ Code Implementation
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### 1. The Custom Pipe (`text-truncate.pipe.ts`)
 
-```bash
-ng generate component component-name
-```
+This custom pipe implements the `PipeTransform` interface. It safely reads any string input and truncates it down to its first 4 characters, appending an ellipsis (`...`) to gracefully indicate hidden text.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+```typescript
+import { Pipe, PipeTransform } from '@angular/core';
 
-```bash
-ng generate --help
-```
+@Pipe({
+  name: 'textTruncate',
+})
+export class TextTruncatePipe implements PipeTransform {
+  transform(value: string): string {
+    if (!value) return '';
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+    return value.slice(0, 4) + '...';
+  }
+}
